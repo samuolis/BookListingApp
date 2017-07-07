@@ -1,16 +1,14 @@
 package com.example.android.booklistingapp;
 
 import android.app.LoaderManager;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.Loader;
 import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -26,7 +24,7 @@ import static com.example.android.booklistingapp.MainActivity.bookName;
 public class book_list extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Book>> {
 
     private BookAdapter mAdapter;
-    private static final String URL_String ="https://www.googleapis.com/books/v1/volumes?q=";
+    private static final String URL_String = "https://www.googleapis.com/books/v1/volumes?q=";
     private static final int BOOK_LOADER_ID = 1;
     private TextView mEmptyStateTextView;
 
@@ -51,7 +49,7 @@ public class book_list extends AppCompatActivity implements LoaderManager.Loader
         mEmptyStateTextView = (TextView) findViewById(R.id.emptyText);
         earthquakeListView.setEmptyView(mEmptyStateTextView);
 
-        if(isConnected) {
+        if (isConnected) {
 
             // Create a new {@link ArrayAdapter} of earthquakes
             earthquakeListView.setAdapter(mAdapter);
@@ -79,21 +77,19 @@ public class book_list extends AppCompatActivity implements LoaderManager.Loader
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
             loaderManager.initLoader(BOOK_LOADER_ID, null, this);
-        }
-        else
-        {
+        } else {
             ProgressBar progress = (ProgressBar) findViewById(R.id.loading_spinner);
             progress.setVisibility(View.GONE);
             mEmptyStateTextView.setText("No Internet Conection.");
         }
 
 
-
     }
+
     @Override
     public Loader<List<Book>> onCreateLoader(int i, Bundle bundle) {
         // Create a new loader for the given URL
-        return new BookLoader(this, URL_String+bookName.getText().toString());
+        return new BookLoader(this, URL_String + bookName.getText().toString());
     }
 
     @Override
@@ -110,9 +106,7 @@ public class book_list extends AppCompatActivity implements LoaderManager.Loader
         // data set. This will trigger the ListView to update.
         if (books != null && !books.isEmpty()) {
             mAdapter.addAll(books);
-        }
-        else
-        {
+        } else {
             mEmptyStateTextView.setText("No results found.");
             Toast.makeText(this, "Type your book more precisely or search for another book :)", Toast.LENGTH_LONG).show();
         }

@@ -1,11 +1,8 @@
 package com.example.android.booklistingapp;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.GradientDrawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,8 +16,6 @@ import android.widget.TextView;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-
-import static java.security.AccessController.getContext;
 
 /**
  * Created by Lukas on 2017-07-07.
@@ -64,23 +59,14 @@ public class BookAdapter extends ArrayAdapter<Book> {
         authorText.setText(currentBook.getAuthor());
 
 
-
         TextView Date = (TextView) listItemView.findViewById(R.id.listDate);
 
         Date.setText(currentBook.getDate());
 
 
-        String magUrl=currentBook.getUrl();
-
-
-
-
-
         return listItemView;
 
     }
-
-
 
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {

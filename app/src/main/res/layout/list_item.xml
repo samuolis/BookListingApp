@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/list_item"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/list_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/listImage"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/book_png2117"/>
+        android:src="@drawable/book_png2117" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -19,27 +20,27 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginLeft="10dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/listTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Harry Potter"
-                android:textSize="20sp"
                 android:maxLines="1"
                 android:textColor="#000000"
-                />
+                android:textSize="20sp"
+                tools:text="Harry Potter" />
+
             <TextView
                 android:id="@+id/listAuthor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="By Someone"
+                android:textColor="#000000"
                 android:textSize="15sp"
 
-                android:textColor="#000000"/>
+                tools:text="By Someone" />
 
         </LinearLayout>
 
@@ -47,12 +48,12 @@
             android:id="@+id/listDate"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            tools:text="2012-10-05"
-            android:textSize="15sp"
             android:layout_weight="0.5"
+            android:gravity="center_vertical"
             android:paddingRight="12dp"
             android:textColor="#000000"
-            android:gravity="center_vertical"/>
+            android:textSize="15sp"
+            tools:text="2012-10-05" />
 
     </LinearLayout>
 

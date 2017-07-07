@@ -1,7 +1,5 @@
 package com.example.android.booklistingapp;
 
-import android.media.Image;
-
 /**
  * Created by Lukas on 2017-07-07.
  */
@@ -20,8 +18,8 @@ public class Book {
         mTitle = Title;
         mAuthor = Author;
         mDate = Date;
-        mImage=Image;
-        mUrl=Url;
+        mImage = Image;
+        mUrl = Url;
     }
 
 
@@ -36,6 +34,12 @@ public class Book {
     public String getDate() {
         return mDate;
     }
-    public String getImage(){return mImage; }
-    public String getUrl() {return mUrl; }
+
+    public String getImage() {
+        return mImage;
+    }
+
+    public String getUrl() {
+        return mUrl;
+    }
 }
