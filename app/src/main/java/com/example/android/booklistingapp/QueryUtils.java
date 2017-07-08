@@ -1,13 +1,7 @@
 package com.example.android.booklistingapp;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.ImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,14 +13,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.R.attr.bitmap;
-import static java.lang.Long.getLong;
 
 /**
  * Created by Lukas on 2017-07-07.
@@ -35,12 +25,6 @@ import static java.lang.Long.getLong;
 public class QueryUtils {
 
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
-
-
-
-
-
-
 
 
     /**
@@ -64,9 +48,9 @@ public class QueryUtils {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
 
-        List<Book> earthquake = extractFeatureFromJson(jsonResponse);
+        List<Book> book = extractFeatureFromJson(jsonResponse);
 
-        return earthquake;
+        return book;
 
 
     }
@@ -98,9 +82,8 @@ public class QueryUtils {
             if (urlConnection.getResponseCode() == 200) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
-            }
-            else{
-                Log.e(LOG_TAG, "Eror status is "+ urlConnection.getResponseCode());
+            } else {
+                Log.e(LOG_TAG, "Eror status is " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
             Log.e(LOG_TAG, "IOException was thrown", e);
@@ -149,30 +132,32 @@ public class QueryUtils {
 
             // TODO: Parse the response given by the SAMPLE_JSON_RESPONSE string and
             // build up a list of Earthquake objects with the corresponding data.
-            JSONObject JObject= new JSONObject(earthquakeJSON);
+            JSONObject JObject = new JSONObject(earthquakeJSON);
 
             JSONArray bookArray = JObject.getJSONArray("items");
-
+            String Author;
+            String Date;
 
             for (int i = 0; i < bookArray.length(); i++) {
-
                 JSONObject currentBook = bookArray.getJSONObject(i);
                 JSONObject volume = currentBook.getJSONObject("volumeInfo");
                 String Title = volume.getString("title");
-                String Author = volume.getString("authors");
-                JSONObject ImageObejct=volume.getJSONObject("imageLinks");
+                if (volume.has("authors")) {
+                    Author = volume.getString("authors");
+                } else {
+                    Author = "Author N/A";
+                }
+                JSONObject ImageObejct = volume.getJSONObject("imageLinks");
                 String Image = ImageObejct.getString("thumbnail");
-                String Date = volume.getString("publishedDate");
-                String url=volume.getString("infoLink");
-                Book book = new Book(Title, Author, Date, Image , url);
+                if (volume.has("authors")) {
+                    Date = volume.getString("publishedDate");
+                } else {
+                    Date = "Date N/A";
+                }
+                String url = volume.getString("infoLink");
+                Book book = new Book(Title, Author, Date, Image, url);
                 books.add(book);
             }
-
-
-
-
-
-
 
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
@@ -183,7 +168,6 @@ public class QueryUtils {
 
         return books;
     }
-
 
 
 }

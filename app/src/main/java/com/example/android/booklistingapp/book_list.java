@@ -42,19 +42,19 @@ public class book_list extends AppCompatActivity implements LoaderManager.Loader
 
 
         // Find a reference to the {@link ListView} in the layout
-        ListView earthquakeListView = (ListView) findViewById(R.id.list);
+        ListView bookListView = (ListView) findViewById(R.id.list);
 
         mAdapter = new BookAdapter(this, new ArrayList<Book>());
 
         mEmptyStateTextView = (TextView) findViewById(R.id.emptyText);
-        earthquakeListView.setEmptyView(mEmptyStateTextView);
+        bookListView.setEmptyView(mEmptyStateTextView);
 
         if (isConnected) {
 
             // Create a new {@link ArrayAdapter} of earthquakes
-            earthquakeListView.setAdapter(mAdapter);
+            bookListView.setAdapter(mAdapter);
 
-            earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            bookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                     Book website = mAdapter.getItem(position);
@@ -65,10 +65,7 @@ public class book_list extends AppCompatActivity implements LoaderManager.Loader
                     i.setData(Uri.parse(magUrl));
                     startActivity(i);
                 }
-
-
             });
-
 
             // Get a reference to the LoaderManager, in order to interact with loaders.
             LoaderManager loaderManager = getLoaderManager();
@@ -82,7 +79,6 @@ public class book_list extends AppCompatActivity implements LoaderManager.Loader
             progress.setVisibility(View.GONE);
             mEmptyStateTextView.setText("No Internet Conection.");
         }
-
 
     }
 
@@ -98,7 +94,6 @@ public class book_list extends AppCompatActivity implements LoaderManager.Loader
 
         ProgressBar progress = (ProgressBar) findViewById(R.id.loading_spinner);
         progress.setVisibility(View.GONE);
-        mEmptyStateTextView.setText("No earthquakes found.");
 
         mAdapter.clear();
 
