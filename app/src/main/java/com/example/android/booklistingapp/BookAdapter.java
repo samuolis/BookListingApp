@@ -44,11 +44,11 @@ public class BookAdapter extends ArrayAdapter<Book> {
 
         ImageView Image = (ImageView) listItemView.findViewById(R.id.listImage);
 
-
-        // show The Image in a ImageView
-        new DownloadImageTask(Image)
-                .execute(currentBook.getImage());
-
+        if (!currentBook.getImage().equals("")) {
+            // show The Image in a ImageView
+            new DownloadImageTask(Image)
+                    .execute(currentBook.getImage());
+        }
 
         TextView titleText = (TextView) listItemView.findViewById(R.id.listTitle);
 
